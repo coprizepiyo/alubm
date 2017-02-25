@@ -29,7 +29,7 @@
           <ul class="spys">
               <li v-for="picture in pictures" class="spys li">
                 <div class="panel-body-img">
-                  <img width="160" height="200" src="/{{picture.imgSrc}}">
+                  <img width="160" height="200" v-bind:src="picture.imgSrc">
                   <div class="panel-body-edit">
                     <div>
                       <a href="javascript:;" onclick="BtnDelete_Click(this);" class="del-ico"></a>

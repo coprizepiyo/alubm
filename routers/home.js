@@ -12,8 +12,11 @@ router.get('/home',function(req,res){
 
 router.get('/home/pictures',function(req,res){
     if(req.session.user){
-        var user=global.dbHelper.getModel('user');
-        user.find({},function(err,data){
+        var picture=global.dbHelper.getModel('picture');
+        picture.find({},function(err,data){
+            
+            //var string = JSON.stringify(data);
+            //console.log(string);
             res.send(data);
         });
     }
