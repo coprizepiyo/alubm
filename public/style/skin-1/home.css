@@ -1,0 +1,65 @@
+.panel-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.spys {
+    list-style-type: none;
+}
+
+.spys li {
+    float: left;
+    margin: 10px 10px;
+    width: 180px;
+    height: 230px;
+}
+
+.spys li div strong {
+    color: red;
+}
+
+.panel-body-edit{
+    width:160px;
+    height:30px;
+    background-color: rgba(0,0,0,.8);
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    display:none;
+}
+.panel-body-img{
+    position:relative;
+}
+.panel-body-img:hover .panel-body-edit{
+    display:block;
+}
+.panel-body-edit div{
+    float:right;
+}
+.del-ico{
+    height:30px;
+    width:30px;
+    display: inline-block;
+    background-image:url("../image/ico.jpg");
+    background-position:-41px -149px;
+}
+.edit-ico{
+    height:30px;
+    width:30px;
+    display: inline-block;
+    background-image:url("../image/ico.jpg");
+    background-position:-168px -121px;
+    margin-right: 3px;
+}
+
+#Txt_EditName{
+    width:300px;
+}
+
+.alert-danger{
+    display: none;
+}
+
+.page-header{
+    float:right;
+}
