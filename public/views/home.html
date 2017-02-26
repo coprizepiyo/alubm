@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <form class="home-form" action="/home" method="post">
+  <form id="imodel" class="home-form" action="/home" method="post">
     <div style="margin:50px auto;width: 900px;">
       <div class="panel panel-default">
         <div class="panel-heading" style="height: 40px;">
@@ -25,19 +25,17 @@
             </div>
           </div>
         </div>
-        <div id="imodel" class="panel-body">
+        <div class="panel-body">
           <ul class="spys">
               <li v-for="(picture,index) in pictures" class="spys li">
                 <div class="panel-body-img">
                   <img width="160" height="200" v-bind:src="picture.imgSrc">
                   <div class="panel-body-edit">
                     <div>
-                      <a href="javascript:;" 
-                        v-on:click="deletePicture(index)"
-                        class="del-ico"></a>
+                      <a href="javascript:;" v-on:click="deletePicture(index)" class="del-ico"></a>
                     </div>
                     <div>
-                      <a href="javascript:;" onclick="BtnEdit_Click(this);" class="edit-ico"></a>
+                      <a href="javascript:;" v-on:click="editPicture(index)" class="edit-ico"></a>
                     </div>
                   </div>
                 </div>
@@ -68,14 +66,14 @@
             <table>
               <tr>
                 <td>图片名:</td>
-                <td><input id="Txt_EditName" type="text" name="" value=""></td>
+                <td><input id="Txt_EditName" type="text" v-model="temp.imgName"></td>
               </tr>
             </table>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">关闭
 				</button>
-            <button type="button" onclick="BtnUpdate_Click()" class="btn btn-primary">
+            <button type="button" v-on:click="updatePicture" class="btn btn-primary">
 					提交更改
 				</button>
           </div>

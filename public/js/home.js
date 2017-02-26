@@ -9,7 +9,12 @@ $(function(){
        var app=new Vue({
             el:"#imodel",
             data:{
-                pictures:[]
+                pictures:[],
+                temp:{
+                    index:'',
+                    imgId:'',
+                    imgName:''
+                }
             },
             methods:{
                 deletePicture:function(index){
@@ -17,17 +22,46 @@ $(function(){
                         imgId:this.pictures[index]._id,
                         imgSrc:this.pictures[index].imgSrc
                     }
-                    alert(lData.imgSrc);
                     $.ajax({
                         url:'/home/delete',
                         type:'post',
                         data:lData,
                         success:function(data,status){
-                            alert(data);
                             location.href='/home';
                         },
                         error:function(data,status){
-                            console.log(data['responseText']);
+                            alert(data['responseText']);
+                        }
+                    });
+                },
+                editPicture:function(index){
+                    this.temp.imgName=this.pictures[index].name;
+                    this.temp.imgId=this.pictures[index]._id;
+                    this.temp.index=index;
+
+                    $('#Txt_EditName').val(this.temp.imgName);
+                    $('#myModal').modal({backdrop: 'static'});
+                    $('#myModal').modal('show');
+                },
+                updatePicture:function(){
+                    var lData={
+                            imgId:this.temp.imgId,
+                            imgName:this.temp.imgName
+                        },
+                        index=this.temp.index;
+                        pictures=this.pictures;
+                    $.ajax({
+                        url:'/home/update',
+                        type:'post',
+                        data:lData,
+                        success:function(data){
+                            pictures[index].name=lData.imgName;
+                            $('.alert-danger').text('更新成功');
+                            $('.alert-danger').show(500);
+                            
+                        },
+                        error:function(data){
+                            alert(data['responseText']);
                         }
                     });
                 }
@@ -50,10 +84,6 @@ $(function(){
         });
     }
 
-
-    function BtnDelete_Click(obj){
-        
-    }
     var lEdit_imgId='';
     function BtnEdit_Click(obj){
         lEdit_imgId=$(obj).attr('imgId');
