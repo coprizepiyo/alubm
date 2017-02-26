@@ -27,12 +27,14 @@
         </div>
         <div id="imodel" class="panel-body">
           <ul class="spys">
-              <li v-for="picture in pictures" class="spys li">
+              <li v-for="(picture,index) in pictures" class="spys li">
                 <div class="panel-body-img">
                   <img width="160" height="200" v-bind:src="picture.imgSrc">
                   <div class="panel-body-edit">
                     <div>
-                      <a href="javascript:;" onclick="BtnDelete_Click(this);" class="del-ico"></a>
+                      <a href="javascript:;" 
+                        v-on:click="deletePicture(index)"
+                        class="del-ico"></a>
                     </div>
                     <div>
                       <a href="javascript:;" onclick="BtnEdit_Click(this);" class="edit-ico"></a>
@@ -41,9 +43,9 @@
                 </div>
                 <div>
                   <a>
- 
+                    {{picture.name}}
                   </a><br>
-                  <strong style="color:red;">简介：</strong>
+                  <strong style="color:red;">简介：{{picture.description}}</strong>
                 </div>
               </li>
           </ul>

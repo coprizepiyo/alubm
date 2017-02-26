@@ -6,18 +6,42 @@
  * --- 2017.02.22 ----------------------------
  */
 $(function(){
+       var app=new Vue({
+            el:"#imodel",
+            data:{
+                pictures:[]
+            },
+            methods:{
+                deletePicture:function(index){
+                    var lData={
+                        imgId:this.pictures[index]._id,
+                        imgSrc:this.pictures[index].imgSrc
+                    }
+                    alert(lData.imgSrc);
+                    $.ajax({
+                        url:'/home/delete',
+                        type:'post',
+                        data:lData,
+                        success:function(data,status){
+                            alert(data);
+                            location.href='/home';
+                        },
+                        error:function(data,status){
+                            console.log(data['responseText']);
+                        }
+                    });
+                }
+            }
+        });
+
+
     function pageInit(){
         $.ajax({
             url:'/home/pictures',
             type:'get',
             success:function(pictures){
                 console.log(pictures);
-                var app=new Vue({
-                    el:"#imodel",
-                    data:{
-                        pictures:pictures
-                    }
-                });
+                app.pictures=pictures;
                 //location.href='/home';
             },
             error:function(data){
@@ -28,20 +52,7 @@ $(function(){
 
 
     function BtnDelete_Click(obj){
-        var lImgId=$(obj).attr('imgId'),
-            lImgSrc=$(obj).attr('imgSrc'),
-            data={imgId:lImgId,imgSrc:lImgSrc};
-        $.ajax({
-            url:'/home/delete',
-            type:'post',
-            data:data,
-            success:function(data,status){
-                location.href='/home';
-            },
-            error:function(data,status){
-                
-            }
-        });
+        
     }
     var lEdit_imgId='';
     function BtnEdit_Click(obj){

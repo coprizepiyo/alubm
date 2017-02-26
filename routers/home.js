@@ -1,5 +1,7 @@
-var express=require('express');
-var router=express.Router();
+var express=require('express'),
+    router=express.Router(),
+    fs=require('fs');
+
 
 router.get('/home',function(req,res){
     if(req.session.user){
@@ -25,8 +27,28 @@ router.get('/home/pictures',function(req,res){
     }
 });
 
-router.post('/home',function(req,res){
-    res.send(200,'hello');
+router.post('/home/delete',function(req,res){
+    if(req.session.user){
+        var picture=global.dbHelper.getModel('picture'),
+            imgSrc=req.body.imgSrc,
+            imgId=req.body.imgId,
+            path="public/"+imgSrc;
+        fs.unlinkSync(path,function(err){
+            if(err){
+                res.send(404,err);
+            }else{
+                picture.remove({_id:imgId},function(err){
+                    if(err){
+                        res.send(404,err);
+                    } else{
+                        res.send(200,"删除成功")
+                    }  
+                })
+            }
+        })
+    }else{
+        res.send('500',"网络异常错误");
+    }
 });
 
 module.exports=router;

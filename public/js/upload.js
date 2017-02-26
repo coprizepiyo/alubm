@@ -1,4 +1,4 @@
-$(function(){
+window.onload=function(){
     var fileItems = [];
     var holder = document.getElementById('holder'),
         tests = {
@@ -117,4 +117,4 @@ $(function(){
     function upload(){
         readfiles(fileItems);
     }
-});
+};
