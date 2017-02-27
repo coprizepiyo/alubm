@@ -1,4 +1,4 @@
-window.onload=function(){
+
     var fileItems = [];
     var holder = document.getElementById('holder'),
         tests = {
@@ -20,7 +20,7 @@ window.onload=function(){
         progress = document.getElementById('uploadprogress'),
         fileupload = document.getElementById('upload');
 
-    "filereader formdata progress".split(' ').forEach(function(api) {
+    "filereader formdata progress".split(' ').forEach(function (api) {
         if (tests[api] === false) {
             support[api].className = 'fail';
         } else {
@@ -36,7 +36,7 @@ window.onload=function(){
         // file= file[0];
         if (tests.filereader === true && acceptedTypes[file.type] === true) {
             var reader = new FileReader();
-            reader.onload = function(event) {
+            reader.onload = function (event) {
                 var image = new Image();
                 image.src = event.target.result;
                 image.width = 250; // a fake resize
@@ -61,13 +61,13 @@ window.onload=function(){
         if (tests.formdata) {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '/upload');
-            xhr.onload = function() {
+            xhr.onload = function () {
                 progress.value = progress.innerHTML = 100;
                 location.href = '/home';
             };
 
             if (tests.progress) {
-                xhr.upload.onprogress = function(event) {
+                xhr.upload.onprogress = function (event) {
                     if (event.lengthComputable) {
                         var complete = (event.loaded / event.total * 100 | 0);
                         progress.value = progress.innerHTML = complete;
@@ -81,15 +81,15 @@ window.onload=function(){
     }
 
     if (tests.dnd) {
-        holder.ondragover = function() {
+        holder.ondragover = function () {
             this.className = 'hover';
             return false;
         };
-        holder.ondragend = function() {
+        holder.ondragend = function () {
             this.className = '';
             return false;
         };
-        holder.ondrop = function(e) {
+        holder.ondrop = function (e) {
             this.className = '';
             e.preventDefault();
             // readfiles(e.dataTransfer.files);
@@ -98,7 +98,7 @@ window.onload=function(){
         }
     } else {
         fileupload.className = 'hidden';
-        fileupload.querySelector('input').onchange = function() {
+        fileupload.querySelector('input').onchange = function () {
             // readfiles(this.files);
             console.log(fileItems);
             fileItems = this.files;
@@ -106,15 +106,15 @@ window.onload=function(){
         };
     }
 
-    function viewHolder(files){
-        while(holder.hasChildNodes()){
-        holder.removeChild(holder.firstChild);
+    function viewHolder(files) {
+        while (holder.hasChildNodes()) {
+            holder.removeChild(holder.firstChild);
         }
-        for(var i=0; i<files.length; i++){
-        previewfile(files[i]);
+        for (var i = 0; i < files.length; i++) {
+            previewfile(files[i]);
         }
     }
-    function upload(){
+
+    function upload() {
         readfiles(fileItems);
     }
-};
