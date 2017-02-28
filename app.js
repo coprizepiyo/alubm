@@ -1,4 +1,4 @@
-/**
+﻿/**
  * === 主模块 ========================================================================= 
  * @version 0.8
  * @author CoprizePiyo (coprizepiyo@hotmail.com)
@@ -10,6 +10,7 @@ var app=express();
 var session=require("express-session");
 var bodyParser=require("body-parser");
 var mongoose=require("mongoose");
+var port=process.env.PORT||8080;
 
 //连接数据库
 global.dbHelper=require("./dao/db_helper.js");
@@ -39,6 +40,6 @@ app.use(bodyParser.urlencoded({extended:false}));
 require("./routers/router.js")(app);
 
 //监听8080端口
-app.listen(8080,function(){
-    console.log("server is startring on port 8080");
+app.listen(port,function(){
+    console.log("server is startring on port "+port);
 });
